@@ -104,7 +104,6 @@ Configuration is stored in `store.json` on the `main` volume and read by the map
 | Action           | Description                     | Allowed States |
 | ---------------- | ------------------------------- | -------------- |
 | Configure        | Set API key and backend URL     | Any            |
-| Proxy Properties | Display API and UI port numbers | Any            |
 
 ---
 
@@ -122,10 +121,10 @@ The `main` volume is included in backups, preserving your `store.json` configura
 
 ## Health Checks
 
-| Check         | Daemon    | Method                | Grace Period |
-| ------------- | --------- | --------------------- | ------------ |
-| API Interface | `primary` | Port listening (8080) | 10s          |
-| Web Interface | `ui`      | Port listening (80)   | —            |
+| Check        | Daemon         | Method                | Display        |
+| ------------ | -------------- | --------------------- | -------------- |
+| Proxy Server | `maple-proxy`  | Port listening (8080) | Proxy Server   |
+| Web UI       | `ui`           | Port listening (80)   | Web UI         |
 
 ---
 
