@@ -101,9 +101,22 @@ Configuration is stored in `store.json` on the `main` volume and read by the map
 
 ## Actions (StartOS UI)
 
-| Action           | Description                     | Allowed States |
-| ---------------- | ------------------------------- | -------------- |
-| Configure        | Set API key and backend URL     | Any            |
+### Configure
+
+| Property | Value |
+|----------|-------|
+| ID | `configure` |
+| Availability | Any status |
+| Visibility | Enabled |
+
+**Inputs:**
+
+| Field | Type | Required | Default | Description |
+|-------|------|----------|---------|-------------|
+| Backend URL | Text | Yes | `https://enclave.trymaple.ai` | Maple/OpenSecret backend URL |
+| API Key | Text (masked) | No | _(empty)_ | Your Maple API key; if empty, clients must provide their own via Authorization header |
+
+**Output:** None (service restarts to apply new configuration)
 
 ---
 
@@ -130,11 +143,9 @@ The `main` volume is included in backups, preserving your `store.json` configura
 
 ## Limitations and Differences
 
-| Area          | Upstream              | StartOS                           |
-| ------------- | --------------------- | --------------------------------- |
-| Configuration | Environment variables | `store.json` via Configure action |
-| Web UI        | Not included          | Bundled nginx chat interface      |
-| Networking    | Direct port binding   | StartOS multi-host interfaces     |
+1. **Configuration via action only** — upstream uses environment variables directly; on StartOS, all configuration is managed through `store.json` via the Configure action
+2. **Bundled web UI** — StartOS adds a custom nginx chat interface not included in the upstream project
+3. **StartOS networking** — uses StartOS multi-host interfaces instead of direct port binding
 
 ---
 
@@ -160,3 +171,35 @@ make x86      # x86_64 only
 ```
 
 Requires [start-cli](https://github.com/Start9Labs/start-os) v0.4.0+ and Docker.
+
+---
+
+## Quick Reference for AI Consumers
+
+```yaml
+package_id: maple-proxy
+images:
+  maple-proxy: ghcr.io/opensecretcloud/maple-proxy (upstream, unmodified)
+  maple-ui: custom nginx build (assets/ui/)
+architectures: [x86_64, aarch64]
+volumes:
+  main: /data
+ports:
+  api: 8080
+  ui: 80
+dependencies: none
+startos_managed_env_vars:
+  - MAPLE_HOST
+  - MAPLE_PORT
+  - MAPLE_ENABLE_CORS
+  - RUST_LOG
+  - MAPLE_BACKEND_URL (user-configurable via action)
+  - MAPLE_API_KEY (user-configurable via action)
+actions:
+  - configure
+health_checks:
+  - port_listening: 8080 (maple-proxy)
+  - port_listening: 80 (maple-ui)
+backup_volumes:
+  - main
+```
