@@ -10,14 +10,11 @@ export const manifest = setupManifest({
   upstreamRepo: 'https://github.com/OpenSecretCloud/maple-proxy',
   marketingUrl: 'https://trymaple.ai/',
   donationUrl: null,
-  docsUrls: [
-    'https://github.com/OpenSecretCloud/maple-proxy/blob/master/README.md',
-  ],
   description: { short, long },
   volumes: ['main'],
   images: {
     'maple-proxy': {
-      source: { dockerTag: 'ghcr.io/opensecretcloud/maple-proxy:0.1.7' },
+      source: { dockerTag: 'ghcr.io/opensecretcloud/maple-proxy:0.1.8' },
       arch: ['x86_64', 'aarch64'],
     },
     'maple-ui': {
