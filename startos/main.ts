@@ -28,7 +28,7 @@ export const main = sdk.setupMain(async ({ effects }) => {
   // Maple Proxy API daemon
   return sdk.Daemons.of(effects)
     .addDaemon('maple-proxy', {
-      subcontainer: await sdk.SubContainer.of(
+      subcontainer: sdk.SubContainer.of(
         effects,
         { imageId: 'maple-proxy' },
         sdk.Mounts.of().mountVolume({
@@ -54,7 +54,7 @@ export const main = sdk.setupMain(async ({ effects }) => {
       requires: [],
     })
     .addDaemon('ui', {
-      subcontainer: await sdk.SubContainer.of(
+      subcontainer: sdk.SubContainer.of(
         effects,
         { imageId: 'maple-ui' },
         null,
