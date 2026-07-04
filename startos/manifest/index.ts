@@ -13,7 +13,7 @@ export const manifest = setupManifest({
   volumes: ['main'],
   images: {
     'maple-proxy': {
-      source: { dockerTag: 'ghcr.io/opensecretcloud/maple-proxy:0.1.8' },
+      source: { dockerTag: 'ghcr.io/opensecretcloud/maple-proxy:0.1.10' },
       arch: ['x86_64', 'aarch64'],
     },
     'maple-ui': {
