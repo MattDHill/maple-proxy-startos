@@ -1,10 +1,10 @@
 import { i18n } from './i18n'
 import { sdk } from './sdk'
-import { apiPort, uiPort } from './utils'
+import { apiHostId, apiPort, uiHostId, uiPort } from './utils'
 
 export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
   // API interface (OpenAI-compatible endpoint)
-  const apiMulti = sdk.MultiHost.of(effects, 'api-multi')
+  const apiMulti = sdk.MultiHost.of(effects, apiHostId)
   const apiMultiOrigin = await apiMulti.bindPort(apiPort, {
     protocol: 'http',
   })
@@ -22,7 +22,7 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
   const apiReceipt = await apiMultiOrigin.export([api])
 
   // Web UI interface
-  const uiMulti = sdk.MultiHost.of(effects, 'ui-multi')
+  const uiMulti = sdk.MultiHost.of(effects, uiHostId)
   const uiMultiOrigin = await uiMulti.bindPort(uiPort, {
     protocol: 'http',
   })
