@@ -8,7 +8,7 @@ Maple Proxy ships two images: the upstream `maple-proxy` (pulled from GHCR) and 
   ```
   gh release view -R OpenSecretCloud/maple-proxy --json tagName -q .tagName
   ```
-  The pin lives in `startos/manifest/index.ts` under `images['maple-proxy'].source.dockerTag` (currently `ghcr.io/opensecretcloud/maple-proxy:0.1.8`). The GHCR tag matches the GitHub release tag with the leading `v` stripped.
+  The pin lives in `startos/manifest/index.ts` under `images['maple-proxy'].source.dockerTag` (currently `ghcr.io/opensecretcloud/maple-proxy:0.1.10`). The GHCR tag matches the GitHub release tag with the leading `v` stripped.
 
 ## Applying the bump
 
