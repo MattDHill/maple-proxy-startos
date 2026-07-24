@@ -1,7 +1,7 @@
 import { VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '0.1.11:0',
+  version: '0.1.11:1',
   releaseNotes: {
     en_US: `Updated Maple Proxy to 0.1.11.
 
