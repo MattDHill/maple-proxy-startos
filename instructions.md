@@ -30,6 +30,8 @@ Open the **Web UI** interface from the Dashboard to chat through your local Mapl
 
 Use the **API** interface address with any OpenAI-compatible client. Point the client's base URL at the API interface address and use your configured Maple API key (or supply one per-request via the `Authorization` header).
 
+If you saved an API key with the **Configure** action, anyone who can reach the API address can use that key without supplying one of their own — and because the Web UI serves the same API paths, its address works the same way. Treat both addresses as private, or leave the key empty and have each client bring its own.
+
 ### Configure action
 
 Run **Configure** any time to change your API key or backend URL. The service restarts to pick up the new values.
